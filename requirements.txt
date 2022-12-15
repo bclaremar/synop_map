@@ -1,6 +1,6 @@
 pandas<1
 numpy<=1.14
-json
+json<1.22
 requests
 matplotlib>=3
 folium
