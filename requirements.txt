@@ -1,0 +1,7 @@
+matplotlib
+folium
+pandas
+numpy
+json
+requests
+selenium
