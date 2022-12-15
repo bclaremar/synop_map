@@ -1,8 +1,7 @@
-pandas
-numpy
+pandas==1.5.2
+numpy==1.23.5
 json
 requests
 matplotlib==3.4.1
 folium
-
 selenium
