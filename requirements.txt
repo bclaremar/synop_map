@@ -1,5 +1,5 @@
 pandas>=1.3
-numpy>=1.20
+numpy>=1.18
 json
 requests
 matplotlib>=3
