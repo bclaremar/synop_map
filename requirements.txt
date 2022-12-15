@@ -1,8 +1,8 @@
-python==3.8.11
-matplotlib
-folium
 pandas
 numpy
 json
 requests
+matplotlib==3.4.1
+folium
+
 selenium
