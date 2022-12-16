@@ -1,7 +1,5 @@
 pandas
-numpy
 requests
 pypi-json
 matplotlib
 folium
-selenium
