@@ -94,10 +94,7 @@ if pid==0:
 print('folium map background')
 geo=df8[['latitude','longitude','T']]
 dat=df8["date_x"].iloc[0]
-#m = folium.Map(
-#    location=[geo.latitude.mean(), geo.longitude.mean()],tiles="Stamen Terrain",
-#    zoom_start=5, control_scale=True 
-#)
+
 m = folium.Map(
     location=[59.5, 17],tiles="Stamen Terrain",
     zoom_start=7, control_scale=True 
@@ -133,5 +130,46 @@ if pid==0:
   pp.show()
   
 m.save("synop_map.html")
+
+
+print('folium map rh background')
+geo=df8[['latitude','longitude','rh']]
+dat=df8["date_x"].iloc[0]
+
+m = folium.Map(
+    location=[59.5, 17],tiles="Stamen Terrain",
+    zoom_start=7, control_scale=True 
+)
+
+print('folium map with rh')
+colormap = cm.LinearColormap(colors=['brown','orange','yellow','lightgreen','green','darkgreen'], index=range(75,100,5),vmin=75,vmax=100)
+
+for index, location_info in geo.iterrows():
+    color=colormap(location_info["rh"])
+    folium.CircleMarker(        
+        [location_info["latitude"], location_info["longitude"]],
+        radius=10,
+        fill=True,
+        color=color,
+        fill_color=color,
+        popup=location_info["rh"]
+    ).add_to(m)
+html = f'''\
+<head><title>Relative humidity map</title></head>\
+<center><h2>{dat} </h2><br /></center>\
+'''
+
+m.get_root().html.add_child(folium.Element(html))
+m
+
+print('save folium map rh')
+img_data = m._to_png(1)
+img = Image.open(io.BytesIO(img_data))
+img.save('image.png')
+pid=os.fork()
+if pid==0:
+  pp.show()
+  
+m.save("synop_map_rh.html")
 
 
